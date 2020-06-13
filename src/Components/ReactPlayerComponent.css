@@ -1,0 +1,7 @@
+.ReactPlayer:focus {
+  outline: none;
+}
+
+video:focus {
+  outline: none;
+}

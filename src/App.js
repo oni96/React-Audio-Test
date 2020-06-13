@@ -1,7 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import FileUpload from './Components/FileUpload'
-import './App.css';
+import React from "react";
+import FileUpload from "./Components/FileUpload";
+import "./App.css";
 
 function App() {
   return (

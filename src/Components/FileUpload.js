@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import axios from "axios";
-import ReactPlayer from 'react-player'
-import './FileUpload.css'
+import "./FileUpload.css";
+import ReactPlayerComponent from "./ReactPlayerComponent";
+import { Button, Container } from "@material-ui/core";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import ImportExportIcon from "@material-ui/icons/ImportExport";
 
 class FileUpload extends Component {
+  // const state;
+  constructor(props) {
+    super(props);
+    this.state = {
+      uploadedFile: "",
+      reactPlayer: null,
+    };
+  }
+
   submitAudioFile = (event) => {
     console.log("Submitting Audio File");
     console.log("Performing Post Request");
@@ -15,30 +27,56 @@ class FileUpload extends Component {
     event.preventDefault();
   };
 
-  render() {
+  fileLoaded = (event) => {
+    // console.log(event.target.files[0]);
 
-    // console.log(styles)
-    
-    return (
+    const url = URL.createObjectURL(event.target.files[0]);
+    console.log(url);
+
+    const react_player = (
       <div>
-        <form onSubmit={this.submitAudioFile}>
-          <input type="file"></input>
-          
-          <div>
-            <h1>Hello</h1>
-          </div>
-
-        <ReactPlayer 
-        style = {{'color': 'red'}}
-        width='500px'
-        height='100px'
-        url='https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' 
-        controls={true} />
-
-        <button type="submit">Submit</button>
-
-                </form>
+        <ReactPlayerComponent Source={url} />
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          size="large"
+          startIcon={<ImportExportIcon />}
+        >
+          Process
+        </Button>
       </div>
+    );
+
+    this.setState({ reactPlayer: react_player });
+    event.preventDefault();
+  };
+
+  render() {
+    // console.log(styles)
+
+    return (
+      <Container maxWidth="sm">
+        <form onSubmit={this.submitAudioFile}>
+          <Button
+            className="Button"
+            size="large"
+            variant="contained"
+            component="label"
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload File
+            <input
+              accept="audio/*"
+              type="file"
+              onChange={this.fileLoaded}
+              style={{ display: "none" }}
+            />
+          </Button>
+          {/* <CloudUploadIcon /> */}
+          {this.state.reactPlayer}
+        </form>
+      </Container>
     );
   }
 }
