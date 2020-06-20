@@ -1,0 +1,17 @@
+.audioPlayerDiv {
+  background: #999999;
+  /* box-shadow: 0 0 15px #000000; */
+  height: 80px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-style: italic;
+  justify-content: space-between;
+}
+
+.audioPlayerProgress {
+  bottom: 0;
+  width: 100%;
+}

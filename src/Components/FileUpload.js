@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./FileUpload.css";
-import ReactPlayerComponent from "./ReactPlayerComponent";
-import { Button, Container } from "@material-ui/core";
+import AudioPlayer from "./AudioPlayerComponent/AudioPlayer";
+// import ReactPlayerComponent from "./ReactPlayerComponent";
+import { Button } from "@material-ui/core";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import ImportExportIcon from "@material-ui/icons/ImportExport";
+// import ImportExportIcon from "@material-ui/icons/ImportExport";
 
 class FileUpload extends Component {
   // const state;
@@ -17,13 +18,6 @@ class FileUpload extends Component {
   }
 
   submitAudioFile = (event) => {
-    console.log("Submitting Audio File");
-    console.log("Performing Post Request");
-
-    axios.get("https://jsonplaceholder.typicode.com/users").then((response) => {
-      console.log(response);
-    });
-
     event.preventDefault();
   };
 
@@ -31,24 +25,15 @@ class FileUpload extends Component {
     // console.log(event.target.files[0]);
 
     const url = URL.createObjectURL(event.target.files[0]);
-    console.log(url);
+    // console.log(url);
 
-    const react_player = (
-      <div>
-        <ReactPlayerComponent Source={url} />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          size="large"
-          startIcon={<ImportExportIcon />}
-        >
-          Process
-        </Button>
-      </div>
+    let react_player = (
+      <AudioPlayer url={url} name={event.target.files[0].name} />
     );
 
     this.setState({ reactPlayer: react_player });
+    // console.log(this.state.reactPlayer);
+
     event.preventDefault();
   };
 
@@ -56,7 +41,7 @@ class FileUpload extends Component {
     // console.log(styles)
 
     return (
-      <Container maxWidth="sm">
+      <div>
         <form onSubmit={this.submitAudioFile}>
           <Button
             className="Button"
@@ -73,10 +58,9 @@ class FileUpload extends Component {
               style={{ display: "none" }}
             />
           </Button>
-          {/* <CloudUploadIcon /> */}
-          {this.state.reactPlayer}
         </form>
-      </Container>
+        {this.state.reactPlayer}
+      </div>
     );
   }
 }

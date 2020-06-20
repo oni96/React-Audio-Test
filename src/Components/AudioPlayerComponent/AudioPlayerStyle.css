@@ -1,0 +1,18 @@
+.playPauseButtonHover:hover {
+  cursor: pointer;
+  color: #555;
+}
+
+.playPauseButtonHover {
+  font-size: 70px !important;
+  color: #000;
+  padding-top: 5px;
+}
+
+.top {
+  position: absolute !important;
+  height: 15px !important;
+  box-shadow: -0px -0px 15px black;
+  bottom: 80px;
+  width: 100%;
+}
