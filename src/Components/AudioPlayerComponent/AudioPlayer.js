@@ -8,29 +8,22 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 class AudioPlayer extends Component {
   constructor(props) {
+    console.log("AudioPlayer Called");
+
     super();
     this.audioRef = React.createRef();
-  }
-
-  componentDidMount() {
-    this.setState({ audioSource: this.props.url, name: this.props.name });
-    console.log(this.props.name);
   }
 
   state = {
     playing: false,
     source: null,
     currentTime: 0,
-    totalTime: 0,
+    duration: 0,
     audioSource: "",
     name: "",
   };
 
   playOrPauseButton = () => {
-    // console.log("CALLED");
-
-    // const styleJson = { color: "#000", fontSize: "50" };
-
     if (!this.state.playing) {
       return (
         <PlayCircleFilledIcon
@@ -77,6 +70,8 @@ class AudioPlayer extends Component {
 
   audioWasLoaded = (e) => {
     this.setState({ duration: Math.floor(e.target.duration) });
+    console.log(this.state.duration);
+
     // let x = e.target.src;
   };
 
@@ -98,19 +93,18 @@ class AudioPlayer extends Component {
               {this.state.currentTime}/{this.state.duration}
             </p>
 
-            <p style={{ fontWeight: "bold" }}>{this.state.name}</p>
+            <p style={{ fontWeight: "bold" }}>{this.props.name}</p>
           </div>
 
           <audio
             onLoadedMetadata={(event) => this.audioWasLoaded(event)}
             onEnded={(event) => this.audioEnded(event)}
             onTimeUpdate={(event) => this.audioIsPlaying(event)}
-            src={this.state.audioSource}
+            src={this.props.url}
             ref={this.audioRef}
           />
 
           <NoteAddIcon className="playPauseButtonHover"></NoteAddIcon>
-          {/* <button style={{ alignItems: "left" }}>take note</button> */}
         </div>
       </div>
     );
