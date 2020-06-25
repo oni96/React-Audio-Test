@@ -11,8 +11,44 @@
 
 .top {
   position: absolute !important;
-  height: 15px !important;
-  box-shadow: -0px -0px 15px black;
+  /* height: 15px !important; */
+  /* box-shadow: -0px -0px 15px black; */
+  box-shadow: 0px -5px 5px 1px #888;
   bottom: 80px;
   width: 100%;
+  background: #999999;
+}
+
+.MuiSlider-rail {
+  width: 100%;
+  height: 15px !important;
+  display: block;
+  opacity: 0.38;
+  position: absolute;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+.MuiSlider-track {
+  height: 15px !important;
+  display: block;
+  position: absolute;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+
+.MuiSlider-thumb {
+  width: 25px !important;
+  height: 25px !important;
+  display: flex;
+  outline: 0;
+  position: absolute;
+  box-sizing: border-box;
+  margin-top: -5px;
+  transition: box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  align-items: center;
+  margin-left: -6px;
+  border-radius: 50%;
+  justify-content: center;
+  background-color: currentColor;
 }

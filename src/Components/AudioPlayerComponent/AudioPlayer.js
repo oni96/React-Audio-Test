@@ -5,6 +5,7 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Slider from "@material-ui/core/Slider";
 
 class AudioPlayer extends Component {
   constructor(props) {
@@ -81,11 +82,12 @@ class AudioPlayer extends Component {
 
     return (
       <div>
-        <LinearProgress
+        {/* <LinearProgress
           className="top"
           variant="determinate"
           value={(this.state.currentTime * 100) / this.state.duration}
-        />
+        /> */}
+
         <div className={styles.audioPlayerDiv}>
           {x}
           <div>
@@ -105,6 +107,12 @@ class AudioPlayer extends Component {
           />
 
           <NoteAddIcon className="playPauseButtonHover"></NoteAddIcon>
+          <Slider
+            className="top"
+            value={(this.state.currentTime * 100) / this.state.duration}
+            // onChange={handleChange}
+            aria-labelledby="continuous-slider"
+          />
         </div>
       </div>
     );
