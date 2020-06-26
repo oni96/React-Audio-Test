@@ -4,8 +4,9 @@ import "./AudioPlayerStyle.css";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PauseCircleFilledIcon from "@material-ui/icons/PauseCircleFilled";
 import NoteAddIcon from "@material-ui/icons/NoteAdd";
-import LinearProgress from "@material-ui/core/LinearProgress";
+// import LinearProgress from "@material-ui/core/LinearProgress";
 import Slider from "@material-ui/core/Slider";
+// import { duration } from "@material-ui/core";
 
 class AudioPlayer extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ class AudioPlayer extends Component {
 
   audioIsPlaying = (e) => {
     this.setState({ currentTime: Math.floor(e.target.currentTime) });
-    this.setState({ duration: Math.floor(e.target.duration) });
+    // this.setState({ duration: Math.floor(e.target.duration) });
 
     // console.log(this.state.currentTime + ":" + this.state.duration);
   };
@@ -76,18 +77,18 @@ class AudioPlayer extends Component {
     // let x = e.target.src;
   };
 
+  handleChangeOfSlider = (e, v) => {
+    console.log(v);
+    let duration = this.state.duration;
+    this.setState({ currentTime: Math.floor((v * duration) / 100) });
+    this.audioRef.current.currentTime = this.state.currentTime;
+  };
   render() {
     let x = this.playOrPauseButton();
     // this.getAudioLength();
 
     return (
       <div>
-        {/* <LinearProgress
-          className="top"
-          variant="determinate"
-          value={(this.state.currentTime * 100) / this.state.duration}
-        /> */}
-
         <div className={styles.audioPlayerDiv}>
           {x}
           <div>
@@ -110,7 +111,7 @@ class AudioPlayer extends Component {
           <Slider
             className="top"
             value={(this.state.currentTime * 100) / this.state.duration}
-            // onChange={handleChange}
+            onChange={(event, value) => this.handleChangeOfSlider(event, value)}
             aria-labelledby="continuous-slider"
           />
         </div>
